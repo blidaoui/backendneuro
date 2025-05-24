@@ -6,10 +6,10 @@ async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
     app.setGlobalPrefix('neuroBackend');
     app.enableCors({
-        origin: 'http://localhost:3000',
-        credentials: true
+        origin: ['http://localhost:3000', 'https://neuroflowconsulting.com'],
+        credentials: true,
     });
-    await app.listen(8000);
+    await app.listen(process.env.PORT || 8000);
 }
 bootstrap();
 //# sourceMappingURL=main.js.map
