@@ -1,0 +1,12 @@
+# Recherchez toutes les versions du fichier .env dans l'historique
+git filter-branch --force --index-filter \
+  "git rm --cached --ignore-unmatch .env" \
+  --prune-empty --tag-name-filter cat -- --all
+
+# Nettoyer et compresser le repo
+git reflog expire --expire=now --all
+git gc --prune=now --aggressive
+
+# Forcer le push
+git push origin --force --all
+git push origin --force --tags
