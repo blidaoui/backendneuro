@@ -1,3 +1,5 @@
+
+.env
 # Recherchez toutes les versions du fichier .env dans l'historique
 git filter-branch --force --index-filter \
   "git rm --cached --ignore-unmatch .env" \
@@ -10,3 +12,4 @@ git gc --prune=now --aggressive
 # Forcer le push
 git push origin --force --all
 git push origin --force --tags
+
