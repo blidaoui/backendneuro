@@ -36,10 +36,7 @@ exports.AppModule = AppModule = __decorate([
             mailer_1.MailerModule.forRoot({
                 transport: {
                     service: 'gmail',
-                    auth: {
-                        user: process.env.GMAIL_USER,
-                        pass: process.env.GMAIL_PASS,
-                    },
+                    auth: {},
                 },
                 defaults: {
                     from: `"NeuroFlow" <${process.env.GMAIL_USER}>`,
