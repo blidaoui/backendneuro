@@ -25,11 +25,11 @@ exports.AppModule = AppModule = __decorate([
             config_1.ConfigModule.forRoot({ isGlobal: true }),
             typeorm_1.TypeOrmModule.forRoot({
                 type: 'postgres',
-                host: 'localhost',
-                port: 5432,
-                username: 'postgres',
-                password: 'blidaoui',
-                database: 'NeuroConsulting',
+                host: process.env.DATABASE_HOST,
+                port: parseInt(process.env.DATABASE_PORT || '5432'),
+                username: process.env.DATABASE_USERNAME,
+                password: process.env.DATABASE_PASSWORD,
+                database: process.env.DATABASE_NAME,
                 entities: [user_entity_1.User],
                 synchronize: true,
             }),
@@ -37,12 +37,12 @@ exports.AppModule = AppModule = __decorate([
                 transport: {
                     service: 'gmail',
                     auth: {
-                        user: 'blidaouiibtihel22@gmail.com',
-                        pass: 'nfmofxkvmqmbdlcb',
+                        user: process.env.GMAIL_USER,
+                        pass: process.env.GMAIL_PASS,
                     },
                 },
                 defaults: {
-                    from: ' <blidaouiibtihel22@gmail.com>',
+                    from: `"NeuroFlow" <${process.env.GMAIL_USER}>`,
                 },
             }),
             user_module_1.UsersModule,
