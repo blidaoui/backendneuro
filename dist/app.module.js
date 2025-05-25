@@ -25,18 +25,27 @@ exports.AppModule = AppModule = __decorate([
             config_1.ConfigModule.forRoot({ isGlobal: true }),
             typeorm_1.TypeOrmModule.forRoot({
                 type: 'postgres',
-                host: process.env.DATABASE_HOST,
+                url: process.env.DATABASE_URL,
                 port: parseInt(process.env.DATABASE_PORT || '5432'),
                 username: process.env.DATABASE_USERNAME,
                 password: process.env.DATABASE_PASSWORD,
                 database: process.env.DATABASE_NAME,
+                ssl: true,
+                extra: {
+                    ssl: {
+                        rejectUnauthorized: false,
+                    },
+                },
                 entities: [user_entity_1.User],
                 synchronize: true,
             }),
             mailer_1.MailerModule.forRoot({
                 transport: {
                     service: 'gmail',
-                    auth: {},
+                    auth: {
+                        user: process.env.GMAIL_USER,
+                        pass: process.env.GMAIL_PASS,
+                    },
                 },
                 defaults: {
                     from: `"NeuroFlow" <${process.env.GMAIL_USER}>`,
