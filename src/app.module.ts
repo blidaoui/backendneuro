@@ -7,6 +7,7 @@ import { User } from './user.entity';
 import { ConfigModule } from '@nestjs/config';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { EmailModule } from './email/email.module';
+import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 
 @Module({
   imports: [
@@ -28,15 +29,25 @@ import { EmailModule } from './email/email.module';
       synchronize: true,
     }),
     MailerModule.forRoot({
-      transport: {
-        service: 'gmail',
+       transport: {
+        host: 'ssl0.ovh.net',
+        port: 465,
+        secure: true, // SSL
         auth: {
-          user: process.env.GMAIL_USER,
-          pass: process.env.GMAIL_PASS,
+          user: process.env.EmailUser,
+          pass:  process.env.EmailPassword ,
         },
       },
       defaults: {
-        from: `"NeuroFlow" <${process.env.GMAIL_USER}>`,
+        from: `"NeuroFlow Consulting" <${process.env.EmailUser}>`,
+      },
+         preview: false,
+      template: {
+        dir: __dirname + '/templates',
+        adapter: new HandlebarsAdapter(),
+        options: {
+          strict: true,
+        },
       },
     }),
     UsersModule,
@@ -46,3 +57,4 @@ import { EmailModule } from './email/email.module';
   providers: [AppService],
 })
 export class AppModule {}
+

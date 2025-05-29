@@ -16,6 +16,7 @@ const user_entity_1 = require("./user.entity");
 const config_1 = require("@nestjs/config");
 const mailer_1 = require("@nestjs-modules/mailer");
 const email_module_1 = require("./email/email.module");
+const handlebars_adapter_1 = require("@nestjs-modules/mailer/dist/adapters/handlebars.adapter");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -41,14 +42,24 @@ exports.AppModule = AppModule = __decorate([
             }),
             mailer_1.MailerModule.forRoot({
                 transport: {
-                    service: 'gmail',
+                    host: 'ssl0.ovh.net',
+                    port: 465,
+                    secure: true,
                     auth: {
-                        user: process.env.GMAIL_USER,
-                        pass: process.env.GMAIL_PASS,
+                        user: process.env.EmailUser,
+                        pass: process.env.EmailPassword,
                     },
                 },
                 defaults: {
-                    from: `"NeuroFlow" <${process.env.GMAIL_USER}>`,
+                    from: `"NeuroFlow Consulting" <${process.env.EmailUser}>`,
+                },
+                preview: false,
+                template: {
+                    dir: __dirname + '/templates',
+                    adapter: new handlebars_adapter_1.HandlebarsAdapter(),
+                    options: {
+                        strict: true,
+                    },
                 },
             }),
             user_module_1.UsersModule,
