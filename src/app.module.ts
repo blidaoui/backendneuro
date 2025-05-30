@@ -29,7 +29,7 @@ import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handleba
       synchronize: true,
     }),
     MailerModule.forRoot({
-       transport: {
+      transport: {
         host: 'ssl0.ovh.net',
         port: 465,
         secure: true, // SSL
@@ -37,11 +37,12 @@ import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handleba
           user: process.env.EmailUser,
           pass:  process.env.EmailPassword ,
         },
+
       },
       defaults: {
-        from: `"NeuroFlow Consulting" <${process.env.EmailUser}>`,
+        from: `"NeuroFlow" <${process.env.EmailUser}>`,
       },
-         preview: false,
+       preview: false,
       template: {
         dir: __dirname + '/templates',
         adapter: new HandlebarsAdapter(),
@@ -57,4 +58,3 @@ import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handleba
   providers: [AppService],
 })
 export class AppModule {}
-

@@ -6,17 +6,22 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(), // Charge les variables d'environnement
+    ConfigModule.forRoot(),
     MailerModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) => ({
         transport: {
-          service: 'gmail',
+          host: 'ssl0.ovh.net',
+          port: 465,
+          secure: true,
           auth: {
-            user: configService.get<string>('EMAIL_USER'),
-            pass: configService.get<string>('EMAIL_PASS'),
+            user: configService.get<string>('EmailUser'),
+            pass: configService.get<string>('EmailPassword'),
           },
+        },
+        defaults: {
+          from: '"NeuroFlow" <contact@neuroflow.com>',
         },
       }),
     }),

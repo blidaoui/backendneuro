@@ -51,7 +51,7 @@ exports.AppModule = AppModule = __decorate([
                     },
                 },
                 defaults: {
-                    from: `"NeuroFlow Consulting" <${process.env.EmailUser}>`,
+                    from: `"NeuroFlow" <${process.env.EmailUser}>`,
                 },
                 preview: false,
                 template: {

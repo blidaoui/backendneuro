@@ -24,11 +24,16 @@ exports.EmailModule = EmailModule = __decorate([
                 inject: [config_1.ConfigService],
                 useFactory: async (configService) => ({
                     transport: {
-                        service: 'gmail',
+                        host: 'ssl0.ovh.net',
+                        port: 465,
+                        secure: true,
                         auth: {
-                            user: configService.get('EMAIL_USER'),
-                            pass: configService.get('EMAIL_PASS'),
+                            user: configService.get('EmailUser'),
+                            pass: configService.get('EmailPassword'),
                         },
+                    },
+                    defaults: {
+                        from: '"NeuroFlow" <contact@neuroflow.com>',
                     },
                 }),
             }),
