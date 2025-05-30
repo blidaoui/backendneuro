@@ -16,7 +16,6 @@ const user_entity_1 = require("./user.entity");
 const config_1 = require("@nestjs/config");
 const mailer_1 = require("@nestjs-modules/mailer");
 const email_module_1 = require("./email/email.module");
-const handlebars_adapter_1 = require("@nestjs-modules/mailer/dist/adapters/handlebars.adapter");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -52,14 +51,6 @@ exports.AppModule = AppModule = __decorate([
                 },
                 defaults: {
                     from: `"NeuroFlow" <${process.env.EmailUser}>`,
-                },
-                preview: false,
-                template: {
-                    dir: __dirname + '/templates',
-                    adapter: new handlebars_adapter_1.HandlebarsAdapter(),
-                    options: {
-                        strict: true,
-                    },
                 },
             }),
             user_module_1.UsersModule,

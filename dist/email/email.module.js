@@ -11,33 +11,12 @@ const common_1 = require("@nestjs/common");
 const email_service_1 = require("./email.service");
 const email_controller_1 = require("./email.controller");
 const mailer_1 = require("@nestjs-modules/mailer");
-const config_1 = require("@nestjs/config");
 let EmailModule = class EmailModule {
 };
 exports.EmailModule = EmailModule;
 exports.EmailModule = EmailModule = __decorate([
     (0, common_1.Module)({
-        imports: [
-            config_1.ConfigModule.forRoot(),
-            mailer_1.MailerModule.forRootAsync({
-                imports: [config_1.ConfigModule],
-                inject: [config_1.ConfigService],
-                useFactory: async (configService) => ({
-                    transport: {
-                        host: 'ssl0.ovh.net',
-                        port: 465,
-                        secure: true,
-                        auth: {
-                            user: configService.get('EmailUser'),
-                            pass: configService.get('EmailPassword'),
-                        },
-                    },
-                    defaults: {
-                        from: '"NeuroFlow" <contact@neuroflow.com>',
-                    },
-                }),
-            }),
-        ],
+        imports: [mailer_1.MailerModule],
         controllers: [email_controller_1.EmailController],
         providers: [email_service_1.EmailService],
     })
