@@ -19,8 +19,8 @@ let EmailService = class EmailService {
     }
     async sendMail(name, last_name, email, number_phone, message) {
         await this.mailerService.sendMail({
-            to: 'contact@neuroflowconsulting.com',
-            subject: `Nouveau message de ${name}`,
+            to: 'blidaouiibtihel22@gmail.com',
+            subject: `new message from ${name}`,
             text: `name: ${name}\n lastName: ${last_name}\n email: ${email}\n number_phone: ${number_phone}\n  message:\n${message}`,
         });
     }

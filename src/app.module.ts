@@ -29,19 +29,15 @@ import { EmailModule } from './email/email.module';
     }),
     MailerModule.forRoot({
       transport: {
-        host: 'ssl0.ovh.net',
-        port: 465,
-        secure: true, // SSL
+        service: 'gmail',
         auth: {
-          user: process.env.EmailUser,
-          pass:  process.env.EmailPassword ,
+          user: process.env.GMAIL_USER,
+          pass: process.env.GMAIL_PASS,
         },
-
       },
       defaults: {
-        from: `"NeuroFlow" <${process.env.EmailUser}>`,
+        from: `"NeuroFlow" <${process.env.GMAIL_USER}>`,
       },
-      
     }),
     UsersModule,
     EmailModule,
